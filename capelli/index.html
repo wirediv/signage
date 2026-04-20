@@ -81,6 +81,18 @@
       },
     }
   </script>
+  <script>
+    const pushURL = "https://status.wirediv.dev/api/push/8Dj3EOQwslEAgNRZayPpZLDI2oHExbDb?status=up&msg=OK&ping=";
+    const interval = 60;
+
+    const push = async () => {
+      await fetch(pushURL);
+      console.log("Pushed!");
+    };
+
+    push();
+    setInterval(push, interval * 1000);
+  </script>
   <style>
     html {
       height: 100%;
@@ -155,108 +167,116 @@
     <div id="fit-outer" class="fit-outer">
       <div id="fit-inner" class="fit-inner">
         <div class="page-root">
-    <!-- Header -->
-    <header
-      class="bg-stone-50/80 backdrop-blur-xl z-10 flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 pb-6 pt-6 sm:pb-8 sm:pt-8 lg:pb-10 lg:pt-12">
-      <div class="flex min-w-0 items-center gap-3 sm:gap-6">
-        <img alt="Mole Institute Logo" class="h-12 w-auto shrink-0 sm:h-16"
-          data-alt="Sophisticated medical institute logo featuring elegant serif typography and a minimalist burgundy emblem on a clean white background"
-          src="https://www.moleinstitute.com/wp-content/uploads/2025/10/cropped-Mole_Institute_logo_emblem_gold-e1761595525281.png">
-        <h1 class="font-headline truncate text-2xl font-bold tracking-tight text-primary sm:text-3xl">Mole Institute
-        </h1>
-      </div>
-      <div class="flex max-w-full items-center gap-2 text-on-surface-variant sm:gap-4 sm:font-semibold">
-        <span class="material-symbols-outlined shrink-0 text-primary">verified_user</span>
-        <span class="font-label text-xs uppercase tracking-widest sm:text-sm">Certified Dermatology Specialists</span>
-      </div>
-    </header>
-    <!-- Main: column on small screens, split from lg up -->
-    <main class="flex w-full flex-col sm:flex-row sm:items-stretch">
-      <!-- Editorial -->
-      <div
-        class="relative flex w-full flex-col justify-center px-4 py-8 sm:px-8 sm:py-10 lg:w-1/2 lg:px-10 lg:py-12 xl:px-16">
-        <!-- Background Subtle Texture -->
-        <div class="absolute inset-0 opacity-5 pointer-events-none bg-[url('image-11.png')] bg-cover bg-center"
-          data-alt="Microscopic view of healthy skin texture with soft warm lighting and clinical burgundy color tones">
-        </div>
-        <div class="relative z-10">
-          <span class="mb-4 block text-sm font-extrabold uppercase tracking-[0.2em] text-primary font-label sm:mb-6">Precision
-            Medicine</span>
-          <h2 class="headline-display font-headline mb-6 font-bold text-on-background sm:mb-8">
-            Expert Mole &amp; <span class="hidden sm:inline"><br></span>
-            <span class="text-primary">Stain</span> Removal
-          </h2>
-          <div class="flex max-w-md flex-col gap-5 sm:gap-6">
-            <div class="flex items-start gap-4">
-              <div class="mt-1 bg-primary/10 p-2 rounded-lg">
-                <span class="material-symbols-outlined text-primary">biotech</span>
+          <!-- Header -->
+          <header
+            class="bg-stone-50/80 backdrop-blur-xl z-10 flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 pb-6 pt-6 sm:pb-8 sm:pt-8 lg:pb-10 lg:pt-12">
+            <div class="flex min-w-0 items-center gap-3 sm:gap-6">
+              <img alt="Mole Institute Logo" class="h-12 w-auto shrink-0 sm:h-16"
+                data-alt="Sophisticated medical institute logo featuring elegant serif typography and a minimalist burgundy emblem on a clean white background"
+                src="https://www.moleinstitute.com/wp-content/uploads/2025/10/cropped-Mole_Institute_logo_emblem_gold-e1761595525281.png">
+              <h1 class="font-headline truncate text-2xl font-bold tracking-tight text-primary sm:text-3xl">Mole
+                Institute
+              </h1>
+            </div>
+            <div class="flex max-w-full items-center gap-2 text-on-surface-variant sm:gap-4 sm:font-semibold">
+              <span class="material-symbols-outlined shrink-0 text-primary">verified_user</span>
+              <span class="font-label text-xs uppercase tracking-widest sm:text-sm">Certified Dermatology
+                Specialists</span>
+            </div>
+          </header>
+          <!-- Main: column on small screens, split from lg up -->
+          <main class="flex w-full flex-col sm:flex-row sm:items-stretch">
+            <!-- Editorial -->
+            <div
+              class="relative flex w-full flex-col justify-center px-4 py-8 sm:px-8 sm:py-10 lg:w-1/2 lg:px-10 lg:py-12 xl:px-16">
+              <!-- Background Subtle Texture -->
+              <div class="absolute inset-0 opacity-5 pointer-events-none bg-[url('image-11.png')] bg-cover bg-center"
+                data-alt="Microscopic view of healthy skin texture with soft warm lighting and clinical burgundy color tones">
               </div>
-              <div>
-                <h3 class="font-bold text-lg text-on-background">Advanced Diagnostic Imaging
+              <div class="relative z-10">
+                <span
+                  class="mb-4 block text-sm font-extrabold uppercase tracking-[0.2em] text-primary font-label sm:mb-6">Precision
+                  Medicine</span>
+                <h2 class="headline-display font-headline mb-6 font-bold text-on-background sm:mb-8">
+                  Expert Mole &amp; <span class="hidden sm:inline"><br></span>
+                  <span class="text-primary">Stain</span> Removal
+                </h2>
+                <div class="flex max-w-md flex-col gap-5 sm:gap-6">
+                  <div class="flex items-start gap-4">
+                    <div class="mt-1 bg-primary/10 p-2 rounded-lg">
+                      <span class="material-symbols-outlined text-primary">biotech</span>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-lg text-on-background">Advanced Diagnostic Imaging
+                      </h3>
+                      <p class="text-on-surface-variant leading-relaxed">State-of-the-art dermoscopy
+                        for precise identification and safe removal protocols.</p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-4">
+                    <div class="mt-1 bg-primary/10 p-2 rounded-lg">
+                      <span class="material-symbols-outlined text-primary">medical_services</span>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-lg text-on-background">Minimally Invasive Care</h3>
+                      <p class="text-on-surface-variant leading-relaxed">Surgical excellence with a
+                        focus on aesthetic outcomes and rapid recovery.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-8 flex items-center gap-3 sm:mt-10 sm:gap-4 lg:mt-12">
+                  <div class="h-px w-8 shrink-0 bg-primary sm:w-12"></div>
+                  <p class="font-headline text-lg italic text-primary-container sm:text-xl">Excellence in Dermatological
+                    Care
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- QR & CTA -->
+            <div
+              class="relative flex w-full flex-col items-center justify-center bg-surface-container-low px-4 py-10 sm:px-8 lg:w-1/2 lg:px-10 xl:px-16">
+              <div
+                class="absolute right-0 top-0 h-40 w-40 rounded-bl-[8rem] bg-primary/5 sm:h-64 sm:w-64 sm:rounded-bl-[12rem]">
+              </div>
+              <div
+                class="relative z-10 flex w-full max-w-sm flex-col items-center rounded-[1.75rem] border border-outline-variant/10 bg-surface-container-lowest p-8 editorial-shadow sm:rounded-[2.5rem] sm:p-10 lg:p-12">
+                <div class="mb-6 rounded-2xl border border-outline-variant/20 bg-white p-3 sm:mb-8 sm:p-4">
+                  <img alt="Scan to book consultation"
+                    class="mx-auto aspect-square w-[min(12rem,70vw)] max-w-[192px] sm:max-w-none sm:w-48"
+                    data-alt="High-resolution digital QR code centered on a clean white background with subtle burgundy border accents"
+                    src="https://www.moleinstitute.com/wp-content/uploads/2026/04/mole_institute_qr_code.png">
+                </div>
+                <h3 class="mb-2 text-center font-headline text-xl font-bold text-on-background sm:text-2xl">Scan to Book
                 </h3>
-                <p class="text-on-surface-variant leading-relaxed">State-of-the-art dermoscopy
-                  for precise identification and safe removal protocols.</p>
+                <p class="mb-6 text-center font-medium text-on-surface-variant sm:mb-8">Secure your consultation with
+                  our
+                  specialist team in seconds.</p>
+                <button type="button"
+                  class="flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-primary to-primary-container py-3.5 pl-8 pr-8 text-base font-bold text-white shadow-lg shadow-primary/20 sm:py-4 sm:text-lg"
+                  aria-label="Continue"><span class="material-symbols-outlined">arrow_forward</span>
+                </button>
+              </div>
+              <div
+                class="mt-8 flex max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center font-label text-[0.65rem] uppercase tracking-widest text-on-surface-variant/60 sm:mt-10 sm:gap-x-6 sm:gap-y-3 sm:text-xs lg:mt-12">
+                <span>No Referral Required</span>
+                <span class="hidden h-1 w-1 rounded-full bg-outline sm:inline-block" aria-hidden="true"></span>
+                <span>Private &amp; Confidential</span>
+                <span class="hidden h-1 w-1 rounded-full bg-outline sm:inline-block" aria-hidden="true"></span>
+                <span>Walk-ins Welcome</span>
               </div>
             </div>
-            <div class="flex items-start gap-4">
-              <div class="mt-1 bg-primary/10 p-2 rounded-lg">
-                <span class="material-symbols-outlined text-primary">medical_services</span>
-              </div>
-              <div>
-                <h3 class="font-bold text-lg text-on-background">Minimally Invasive Care</h3>
-                <p class="text-on-surface-variant leading-relaxed">Surgical excellence with a
-                  focus on aesthetic outcomes and rapid recovery.</p>
-              </div>
-            </div>
-          </div>
-          <div class="mt-8 flex items-center gap-3 sm:mt-10 sm:gap-4 lg:mt-12">
-            <div class="h-px w-8 shrink-0 bg-primary sm:w-12"></div>
-            <p class="font-headline text-lg italic text-primary-container sm:text-xl">Excellence in Dermatological Care
-            </p>
+          </main>
+          <div
+            class="pointer-events-none absolute bottom-4 left-4 flex items-center gap-3 sm:bottom-8 sm:left-8 lg:bottom-16 lg:left-16"
+            aria-hidden="true">
+            <div class="h-2.5 w-2.5 rounded-full bg-primary sm:h-3 sm:w-3"></div>
+            <div class="h-2.5 w-2.5 rounded-full bg-primary/40 sm:h-3 sm:w-3"></div>
+            <div class="h-2.5 w-2.5 rounded-full bg-primary/10 sm:h-3 sm:w-3"></div>
           </div>
         </div>
-      </div>
-      <!-- QR & CTA -->
-      <div
-        class="relative flex w-full flex-col items-center justify-center bg-surface-container-low px-4 py-10 sm:px-8 lg:w-1/2 lg:px-10 xl:px-16">
-        <div class="absolute right-0 top-0 h-40 w-40 rounded-bl-[8rem] bg-primary/5 sm:h-64 sm:w-64 sm:rounded-bl-[12rem]">
-        </div>
-        <div
-          class="relative z-10 flex w-full max-w-sm flex-col items-center rounded-[1.75rem] border border-outline-variant/10 bg-surface-container-lowest p-8 editorial-shadow sm:rounded-[2.5rem] sm:p-10 lg:p-12">
-          <div class="mb-6 rounded-2xl border border-outline-variant/20 bg-white p-3 sm:mb-8 sm:p-4">
-            <img alt="Scan to book consultation"
-              class="mx-auto aspect-square w-[min(12rem,70vw)] max-w-[192px] sm:max-w-none sm:w-48"
-              data-alt="High-resolution digital QR code centered on a clean white background with subtle burgundy border accents"
-              src="https://www.moleinstitute.com/wp-content/uploads/2026/04/mole_institute_qr_code.png">
-          </div>
-          <h3 class="mb-2 text-center font-headline text-xl font-bold text-on-background sm:text-2xl">Scan to Book</h3>
-          <p class="mb-6 text-center font-medium text-on-surface-variant sm:mb-8">Secure your consultation with our
-            specialist team in seconds.</p>
-          <button type="button"
-            class="flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-primary to-primary-container py-3.5 pl-8 pr-8 text-base font-bold text-white shadow-lg shadow-primary/20 sm:py-4 sm:text-lg"
-            aria-label="Continue"><span class="material-symbols-outlined">arrow_forward</span>
-          </button>
-        </div>
-        <div
-          class="mt-8 flex max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center font-label text-[0.65rem] uppercase tracking-widest text-on-surface-variant/60 sm:mt-10 sm:gap-x-6 sm:gap-y-3 sm:text-xs lg:mt-12">
-          <span>No Referral Required</span>
-          <span class="hidden h-1 w-1 rounded-full bg-outline sm:inline-block" aria-hidden="true"></span>
-          <span>Private &amp; Confidential</span>
-          <span class="hidden h-1 w-1 rounded-full bg-outline sm:inline-block" aria-hidden="true"></span>
-          <span>Walk-ins Welcome</span>
-        </div>
-      </div>
-    </main>
-    <div class="pointer-events-none absolute bottom-4 left-4 flex items-center gap-3 sm:bottom-8 sm:left-8 lg:bottom-16 lg:left-16"
-      aria-hidden="true">
-      <div class="h-2.5 w-2.5 rounded-full bg-primary sm:h-3 sm:w-3"></div>
-      <div class="h-2.5 w-2.5 rounded-full bg-primary/40 sm:h-3 sm:w-3"></div>
-      <div class="h-2.5 w-2.5 rounded-full bg-primary/10 sm:h-3 sm:w-3"></div>
-    </div>
       </div>
     </div>
   </div>
-</div>
   <script>
     (function () {
       var outer = document.getElementById('fit-outer');
