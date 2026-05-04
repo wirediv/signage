@@ -96,6 +96,7 @@
   <style>
     html {
       height: 100%;
+      min-height: 100dvh;
       overflow: hidden;
       overscroll-behavior: none;
     }
@@ -103,6 +104,8 @@
     body {
       margin: 0;
       height: 100%;
+      min-height: 100dvh;
+      max-height: 100dvh;
       overflow: hidden;
       overscroll-behavior: none;
       background-color: #f9f9f9;
@@ -111,44 +114,36 @@
       -webkit-text-size-adjust: 100%;
     }
 
-    /* Full-screen stage: no document scroll; content is scaled to fit (see script) */
-    .fit-viewport {
+    /* Full-screen stage: no document scroll; viewport-locked flex column (CSS only) */
+    .signage-stage {
       position: fixed;
       inset: 0;
       z-index: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
       overflow: hidden;
       box-sizing: border-box;
-    }
-
-    .fit-outer {
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .fit-inner {
-      width: 100vw;
-      box-sizing: border-box;
-      transform-origin: top left;
+      min-height: 0;
     }
 
     .page-root {
       position: relative;
       display: flex;
+      flex: 1 1 auto;
       flex-direction: column;
       width: 100%;
       max-width: 100%;
+      min-height: 0;
+      overflow: hidden;
       box-sizing: border-box;
       padding-top: max(0.5rem, env(safe-area-inset-top));
-      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-right: max(2rem, env(safe-area-inset-right));
       padding-bottom: max(1rem, env(safe-area-inset-bottom));
-      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-left: max(2rem, env(safe-area-inset-left));
     }
 
     .headline-display {
-      font-size: clamp(1.75rem, 5vw + 0.75rem, 4.5rem);
+      font-size: clamp(1.25rem, calc(0.65rem + 3.5vi + 0.75dvh), 4rem);
       line-height: 1.1;
     }
 
@@ -159,17 +154,66 @@
     .editorial-shadow {
       box-shadow: 0 32px 64px -12px rgba(26, 28, 28, 0.06);
     }
+
+    /* Wide-short viewports: two columns before lg breakpoint so content stays shorter */
+    @media (orientation: landscape) and (min-width: 600px) {
+      .page-root .signage-main {
+        flex-direction: row;
+        align-items: stretch;
+      }
+
+      .page-root .signage-main>.signage-split {
+        flex: 1 1 50%;
+        width: 50%;
+        max-width: 50%;
+        min-width: 0;
+      }
+    }
+
+    /* Short viewports: tighter vertical rhythm */
+    @media (max-height: 600px) {
+      .page-root {
+        padding-top: max(0.25rem, env(safe-area-inset-top));
+        padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+        padding-left: max(1.5rem, env(safe-area-inset-left));
+        padding-right: max(1.5rem, env(safe-area-inset-right));
+      }
+
+      .signage-header {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+        gap: 0.5rem !important;
+      }
+
+      .signage-editorial {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+      }
+
+      .signage-qr {
+        padding-top: 0.75rem !important;
+        padding-bottom: 0.75rem !important;
+      }
+
+      .signage-qr-card {
+        padding: 1.25rem !important;
+        border-radius: 1.25rem !important;
+      }
+
+      .signage-qr-foot {
+        margin-top: 0.75rem !important;
+        gap: 0.375rem 0.75rem !important;
+      }
+    }
   </style>
 </head>
 
 <body class="text-on-background bg-surface antialiased">
-  <div id="fit-viewport" class="fit-viewport">
-    <div id="fit-outer" class="fit-outer">
-      <div id="fit-inner" class="fit-inner">
-        <div class="page-root">
+  <div class="signage-stage">
+    <div class="page-root">
           <!-- Header -->
           <header
-            class="bg-stone-50/80 backdrop-blur-xl z-10 flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 pb-6 pt-6 sm:pb-8 sm:pt-8 lg:pb-10 lg:pt-12">
+            class="signage-header bg-stone-50/80 backdrop-blur-xl z-10 flex w-full min-h-0 flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 pb-6 pt-6 sm:pb-8 sm:pt-8 lg:pb-10 lg:pt-12">
             <div class="flex min-w-0 items-center gap-3 sm:gap-6">
               <img alt="Mole Institute Logo" class="h-12 w-auto shrink-0 sm:h-16"
                 data-alt="Sophisticated medical institute logo featuring elegant serif typography and a minimalist burgundy emblem on a clean white background"
@@ -185,21 +229,21 @@
             </div>
           </header>
           <!-- Main: column on small screens, split from lg up -->
-          <main class="flex w-full flex-col sm:flex-row sm:items-stretch">
+          <main class="signage-main flex w-full min-h-0 flex-1 flex-col overflow-hidden sm:flex-row sm:items-stretch">
             <!-- Editorial -->
             <div
-              class="relative flex w-full flex-col justify-center px-4 py-8 sm:px-8 sm:py-10 lg:w-1/2 lg:px-10 lg:py-12 xl:px-16">
+              class="signage-split signage-editorial relative flex min-h-0 min-w-0 w-full flex-col justify-center overflow-hidden px-4 py-8 sm:px-8 sm:py-10 lg:w-1/2 lg:px-10 lg:py-12 xl:px-16">
               <!-- Background Subtle Texture -->
               <div class="absolute inset-0 opacity-5 pointer-events-none bg-[url('image-11.png')] bg-cover bg-center"
                 data-alt="Microscopic view of healthy skin texture with soft warm lighting and clinical burgundy color tones">
               </div>
-              <div class="relative z-10">
+              <div class="relative z-10 min-h-0 overflow-hidden">
                 <span
                   class="mb-4 block text-sm font-extrabold uppercase tracking-[0.2em] text-primary font-label sm:mb-6">Precision
                   Medicine</span>
                 <h2 class="headline-display font-headline mb-6 font-bold text-on-background sm:mb-8">
-                  Expert Eyebrow Removal &amp; <span class="hidden sm:inline"><br></span>
-                  <span class="text-primary">Alien</span> Abduction
+                  Expert Wart &amp;
+                  <span class="text-primary">Mole</span> Removal
                 </h2>
                 <div class="flex max-w-md flex-col gap-5 sm:gap-6">
                   <div class="flex items-start gap-4">
@@ -224,25 +268,20 @@
                     </div>
                   </div>
                 </div>
-                <div class="mt-8 flex items-center gap-3 sm:mt-10 sm:gap-4 lg:mt-12">
-                  <div class="h-px w-8 shrink-0 bg-primary sm:w-12"></div>
-                  <p class="font-headline text-lg italic text-primary-container sm:text-xl">Excellence in Dermatological
-                    Care
-                  </p>
-                </div>
+                
               </div>
             </div>
             <!-- QR & CTA -->
             <div
-              class="relative flex w-full flex-col items-center justify-center bg-surface-container-low px-4 py-10 sm:px-8 lg:w-1/2 lg:px-10 xl:px-16">
+              class="signage-split signage-qr relative flex min-h-0 min-w-0 w-full flex-col items-center justify-center overflow-hidden bg-surface-container-low px-4 py-10 sm:px-8 lg:w-1/2 lg:px-10 xl:px-16">
               <div
                 class="absolute right-0 top-0 h-40 w-40 rounded-bl-[8rem] bg-primary/5 sm:h-64 sm:w-64 sm:rounded-bl-[12rem]">
               </div>
               <div
-                class="relative z-10 flex w-full max-w-sm flex-col items-center rounded-[1.75rem] border border-outline-variant/10 bg-surface-container-lowest p-8 editorial-shadow sm:rounded-[2.5rem] sm:p-10 lg:p-12">
+                class="signage-qr-card relative z-10 flex w-full max-w-sm flex-col items-center rounded-[1.75rem] border border-outline-variant/10 bg-surface-container-lowest p-8 editorial-shadow sm:rounded-[2.5rem] sm:p-10 lg:p-12">
                 <div class="mb-6 rounded-2xl border border-outline-variant/20 bg-white p-3 sm:mb-8 sm:p-4">
                   <img alt="Scan to book consultation"
-                    class="mx-auto aspect-square w-[min(12rem,70vw)] max-w-[192px] sm:max-w-none sm:w-48"
+                    class="mx-auto aspect-square h-auto w-[min(12rem,28dvh,45vi)] max-w-[min(12rem,45vi)] sm:w-[min(12rem,32dvh,40vi)]"
                     data-alt="High-resolution digital QR code centered on a clean white background with subtle burgundy border accents"
                     src="./assets/ref-mole-institute-qr-code.png">
                 </div>
@@ -251,13 +290,9 @@
                 <p class="mb-6 text-center font-medium text-on-surface-variant sm:mb-8">Secure your consultation with
                   our
                   specialist team in seconds.</p>
-                <button type="button"
-                  class="flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-primary to-primary-container py-3.5 pl-8 pr-8 text-base font-bold text-white shadow-lg shadow-primary/20 sm:py-4 sm:text-lg"
-                  aria-label="Continue"><span class="material-symbols-outlined">arrow_forward</span>
-                </button>
               </div>
               <div
-                class="mt-8 flex max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center font-label text-[0.65rem] uppercase tracking-widest text-on-surface-variant/60 sm:mt-10 sm:gap-x-6 sm:gap-y-3 sm:text-xs lg:mt-12">
+                class="signage-qr-foot mt-8 flex max-w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center font-label text-[0.65rem] uppercase tracking-widest text-on-surface-variant/60 sm:mt-10 sm:gap-x-6 sm:gap-y-3 sm:text-xs lg:mt-12">
                 <span>No Referral Required</span>
                 <span class="hidden h-1 w-1 rounded-full bg-outline sm:inline-block" aria-hidden="true"></span>
                 <span>Private &amp; Confidential</span>
@@ -266,85 +301,8 @@
               </div>
             </div>
           </main>
-          <div
-            class="pointer-events-none absolute bottom-4 left-4 flex items-center gap-3 sm:bottom-8 sm:left-8 lg:bottom-16 lg:left-16"
-            aria-hidden="true">
-            <div class="h-2.5 w-2.5 rounded-full bg-primary sm:h-3 sm:w-3"></div>
-            <div class="h-2.5 w-2.5 rounded-full bg-primary/40 sm:h-3 sm:w-3"></div>
-            <div class="h-2.5 w-2.5 rounded-full bg-primary/10 sm:h-3 sm:w-3"></div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
-  <script>
-    (function () {
-      var outer = document.getElementById('fit-outer');
-      var inner = document.getElementById('fit-inner');
-      if (!outer || !inner) return;
-
-      function viewportSize() {
-        var vv = window.visualViewport;
-        if (vv) {
-          return { w: vv.width, h: vv.height };
-        }
-        return { w: window.innerWidth, h: window.innerHeight };
-      }
-
-      function fit() {
-        var vp = viewportSize();
-        var w = inner.scrollWidth;
-        var h = inner.scrollHeight;
-        if (w < 1 || h < 1) return;
-        var s = Math.min(vp.w / w, vp.h / h);
-        if (s <= 0 || !isFinite(s)) return;
-        inner.style.transform = 'scale(' + s + ')';
-        outer.style.width = w * s + 'px';
-        outer.style.height = h * s + 'px';
-      }
-
-      var scheduled = false;
-      function scheduleFit() {
-        if (scheduled) return;
-        scheduled = true;
-        requestAnimationFrame(function () {
-          scheduled = false;
-          requestAnimationFrame(fit);
-        });
-      }
-
-      window.addEventListener('resize', scheduleFit);
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', scheduleFit);
-        window.visualViewport.addEventListener('scroll', scheduleFit);
-      }
-      window.addEventListener('orientationchange', function () {
-        setTimeout(scheduleFit, 200);
-      });
-
-      var ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(scheduleFit) : null;
-      if (ro) ro.observe(inner);
-
-      var imgs = document.images;
-      for (var i = 0; i < imgs.length; i++) {
-        if (!imgs[i].complete) imgs[i].addEventListener('load', scheduleFit);
-      }
-
-      function runWhenReady() {
-        scheduleFit();
-        if (document.fonts && document.fonts.ready) {
-          document.fonts.ready.then(scheduleFit);
-        }
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', runWhenReady);
-      } else {
-        runWhenReady();
-      }
-      window.addEventListener('load', scheduleFit);
-    })();
-  </script>
 </body>
 
 </html>
